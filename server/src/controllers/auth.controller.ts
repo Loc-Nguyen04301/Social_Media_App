@@ -8,8 +8,7 @@ import {
   generateRefreshToken,
 } from "../config/generateToken";
 import { validateEmail } from "../middlewares/valid";
-import sendEmail from "../config/sendMail";
-import { IDecodedToken, IUser, IUserRegister } from "../config/interface";
+import { IDecodedToken, IUser } from "../config/interface";
 
 const saltRounds = 10;
 
@@ -100,8 +99,6 @@ const authController = {
       const decoded = <IDecodedToken>(
         jwt.verify(refresh_token, `${process.env.REFRESH_TOKEN_SECRET}`)
       );
-      console.log(decoded);
-
       if (!decoded)
         return res.status(400).json({ message: "Please login now!" });
 

@@ -11,7 +11,7 @@ const axiosRequestConfig = (token: string | undefined): AxiosRequestConfig => {
   return config;
 };
 
-export const postAPI = async (url: string, data: object, token?: string) => {
+export const postAPI = async (url: string, data?: object, token?: string) => {
   const res = await axios.post(
     `${import.meta.env.VITE_SERVER_URL}/api/v1/${url}`,
     data,

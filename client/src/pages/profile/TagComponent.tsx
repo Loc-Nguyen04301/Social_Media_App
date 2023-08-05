@@ -1,0 +1,23 @@
+import React from "react";
+
+const TagComponent = () => {
+  return (
+    <div className="mx-auto max-w-[935px] mb-[140px]">
+      <div className="mx-auto max-w-[350px] text-center mt-16">
+        <div>
+          <img
+            className="mx-auto"
+            width={"62px"}
+            src="data:image/png;base64,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"
+          />
+        </div>
+        <div className="text-[30px] font-bold my-2">Ảnh có mặt bạn</div>
+        <div className="text-sm">
+          Khi mọi người gắn thẻ bạn trong ảnh, ảnh sẽ xuất hiện tại đây.
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TagComponent;

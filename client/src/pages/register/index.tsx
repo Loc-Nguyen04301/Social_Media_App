@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { InputChange, FormSubmit } from "../utils/TypeScript";
-import { AuthContext } from "../contexts/AuthContext";
-import { AlertContext } from "../contexts/AlertContext";
-import { AlertActionType } from "../reducers/AlertReducer";
-import { validRegister } from "../utils/Valid";
-import { postAPI } from "../utils/FetchData";
+import { InputChange, FormSubmit, IUserRegister } from "../../utils/TypeScript";
+import { AlertContext } from "../../contexts/AlertContext";
+import { ERROR, LOADING, SUCCESS } from "../../reducers/type";
+import { validRegister } from "../../utils/Valid";
+import { postAPI } from "../../utils/FetchData";
 
 const Register = () => {
-  const [userRegister, setUserRegister] = useState({
+  const [userRegister, setUserRegister] = useState<IUserRegister>({
     name: "",
     account: "",
     password: "",
@@ -17,9 +16,7 @@ const Register = () => {
   const [typePass, setTypePass] = useState(false);
   const [typeCfPassword, setTypeCfPassword] = useState(false);
 
-  const { dispatch: dispatchAuth } = React.useContext(AuthContext);
   const { dispatch: dispatchAlert } = React.useContext(AlertContext);
-  const { ERROR, LOADING, SUCCESS } = AlertActionType;
 
   const handleChangeInput = (e: InputChange) => {
     setUserRegister({ ...userRegister, [e.target.name]: e.target.value });
@@ -28,15 +25,25 @@ const Register = () => {
   const handleSubmit = async (e: FormSubmit) => {
     e.preventDefault();
     const check = validRegister(userRegister);
-    console.log(check);
     if (check.errors.length > 0) {
       return dispatchAlert({ type: ERROR, payload: { errors: check.errors } });
     }
     try {
       dispatchAlert({ type: LOADING, payload: { loading: true } });
-      //call API to register
       const res = await postAPI("auth/register", userRegister);
+      console.log(res);
       dispatchAlert({ type: SUCCESS, payload: { success: res.data.message } });
+      const active_token = res.data.active_token;
+      const res2 = await postAPI("auth/active", { active_token });
+      console.log(res2);
+      setTimeout(
+        () =>
+          dispatchAlert({
+            type: SUCCESS,
+            payload: { success: res2.data.message },
+          }),
+        2000
+      );
     } catch (error: any) {
       dispatchAlert({
         type: ERROR,
@@ -48,7 +55,7 @@ const Register = () => {
   return (
     <div className="h-screen bg-gray-50">
       <div className="mb-[80px] pt-[40px]">
-        <div className="mx-auto  w-[370px] rounded-sm border-2 p-[20px] text-center">
+        <div className="mx-auto w-[370px] rounded-sm border-[1px] border-color-border p-[20px] text-center">
           <div className="my-[30px]">
             <i
               data-visualcompletion="css-img"
@@ -72,7 +79,7 @@ const Register = () => {
                 <input
                   name="name"
                   type="text"
-                  className="mb-[6px] w-full rounded border-[1px] px-2 py-2 text-xs focus:outline-none"
+                  className="mb-[6px] w-full rounded border-[1px] border-color-border px-2 py-2 text-xs focus:outline-none"
                   placeholder="Họ và tên"
                   onChange={handleChangeInput}
                   value={name}
@@ -82,7 +89,7 @@ const Register = () => {
                 <input
                   name="account"
                   type="email"
-                  className="mb-[6px] w-full rounded border-[1px] px-2 py-2 text-xs focus:outline-none"
+                  className="mb-[6px] w-full rounded border-[1px] border-color-border px-2 py-2 text-xs focus:outline-none"
                   placeholder="Email"
                   onChange={handleChangeInput}
                   value={account}
@@ -93,7 +100,7 @@ const Register = () => {
                   name="password"
                   type={typePass ? "text" : "password"}
                   placeholder="Mật khẩu"
-                  className="mb-[6px] w-full rounded border-[1px] px-2 py-2 text-xs focus:outline-none"
+                  className="mb-[6px] w-full rounded border-[1px] border-color-border px-2 py-2 text-xs focus:outline-none"
                   onChange={handleChangeInput}
                   value={password}
                 />
@@ -109,7 +116,7 @@ const Register = () => {
                   name="confirmPassword"
                   type={typeCfPassword ? "text" : "password"}
                   placeholder="Nhập lại mật khẩu"
-                  className="mb-[12px] w-full rounded border-[1px] px-2 py-2 text-xs focus:outline-none"
+                  className="mb-[12px] w-full rounded border-[1px] border-color-border px-2 py-2 text-xs focus:outline-none"
                   onChange={handleChangeInput}
                   value={confirmPassword}
                 />
@@ -121,7 +128,15 @@ const Register = () => {
                 </small>
               </div>
               <div className="first-letter: rounded-lg bg-[#4cb5f9]">
-                <button type="submit" className="w-full py-2 text-neutral-50">
+                <button
+                  type="submit"
+                  className="w-full py-2 text-white"
+                  disabled={
+                    name && account && password && confirmPassword
+                      ? false
+                      : true
+                  }
+                >
                   Đăng ký
                 </button>
               </div>

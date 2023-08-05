@@ -1,0 +1,13 @@
+.sidenav-item {
+  &:hover {
+    .sidenav-item__icon {
+      scale: 1.05;
+    }
+  }
+  &.active {
+    background-color: #f1f0f0;
+    svg {
+      stroke-width: 2.6 !important;
+    }
+  }
+}

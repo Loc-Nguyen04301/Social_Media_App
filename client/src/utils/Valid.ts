@@ -1,4 +1,17 @@
-import { IUserRegister } from "./TypeScript";
+import { IUserLogin, IUserRegister } from "./TypeScript";
+
+export const validLogin = (userLogin: IUserLogin) => {
+  const { account } = userLogin;
+  const errors: string[] = [];
+
+  if (!account) {
+    errors.push("Please add your email.");
+  } else if (!validEmail(account)) {
+    errors.push("Email number format is incorrect.");
+  }
+
+  return { errors };
+};
 
 export const validRegister = (userRegister: IUserRegister) => {
   const { account, name, confirmPassword, password } = userRegister;
@@ -12,9 +25,9 @@ export const validRegister = (userRegister: IUserRegister) => {
   }
 
   if (!account) {
-    errors.push("Please add your email or phone.");
+    errors.push("Please add your email.");
   } else if (!validEmail(account)) {
-    errors.push("Email or phone number format is incorrect.");
+    errors.push("Email number format is incorrect.");
   }
 
   const check = checkPassword(password, confirmPassword);

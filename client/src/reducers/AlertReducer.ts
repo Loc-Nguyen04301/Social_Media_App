@@ -1,16 +1,9 @@
-export enum AlertActionType {
-  SUCCESS = "SUCCESS",
-  ERROR = "ERROR",
-  LOADING = "LOADING",
-}
-
+import { ERROR, LOADING, SUCCESS } from "./type";
 export interface AlertState {
   loading?: boolean;
   success?: string;
   errors?: string[] | string;
 }
-
-const { ERROR, LOADING, SUCCESS } = AlertActionType;
 
 export type AlertAction =
   | {

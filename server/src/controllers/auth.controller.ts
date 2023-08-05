@@ -20,7 +20,7 @@ const authController = {
       if (user)
         return res
           .status(400)
-          .json({ message: "Email or Phone number already exists." });
+          .json({ message: "Email number already exists." });
 
       const passwordHash = await bcrypt.hash(password, saltRounds);
       const newUser = { name, account, password: passwordHash };

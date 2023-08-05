@@ -1,13 +1,5 @@
 import { IUser } from "../utils/TypeScript";
-
-export enum AuthActionType {
-  REGISTER = "REGISTER",
-  LOGIN = "LOGIN",
-  REFRESH_TOKEN = "REFRESH_TOKEN",
-  LOGOUT = "LOGOUT",
-}
-
-const { LOGIN, REGISTER, REFRESH_TOKEN, LOGOUT } = AuthActionType;
+import { LOGIN, REGISTER, REFRESH_TOKEN, LOGOUT } from "./type";
 
 export interface AuthState {
   access_token: string;
@@ -22,24 +14,26 @@ export type AuthAction =
   | {
       type: typeof REGISTER;
       payload: AuthState;
+    }
+  | {
+      type: typeof REFRESH_TOKEN;
+      payload: AuthState;
+    }
+  | {
+      type: typeof LOGOUT;
+      payload: AuthState;
     };
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
-  const { access_token, user } = action.payload;
   switch (action.type) {
     case REGISTER: {
-      return {
-        ...state,
-        access_token,
-        user,
-      };
+      return action.payload;
     }
     case LOGIN: {
-      return {
-        ...state,
-        access_token,
-        user,
-      };
+      return action.payload;
+    }
+    case REFRESH_TOKEN: {
+      return action.payload;
     }
     default: {
       return state;

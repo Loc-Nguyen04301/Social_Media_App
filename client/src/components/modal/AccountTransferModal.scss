@@ -1,0 +1,15 @@
+.account-transfer-modal {
+  .ant-modal-title {
+    text-align: center;
+  }
+  .ant-modal-close-icon {
+    svg {
+      height: 18px;
+      color: black;
+      width: 18px;
+    }
+  }
+  .ant-modal-header {
+    border-bottom: 1px solid #dbdbdb;
+  }
+}

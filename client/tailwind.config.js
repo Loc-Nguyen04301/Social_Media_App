@@ -6,11 +6,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        "blue-text": "#0095f6",
-        "main-color-text": "#000000",
-        "sub-color-text": "#737373",
-        "color-border": "#dbdbdb",
-        "color-modal": "#595959"
+        "blue-text": 'var(--blue-text)',
+        "main-color-text": "var(--main-color-text)",
+        "sub-color-text": "var(--sub-color-text)",
+        "color-border": "var(--color-border)",
+        "color-modal": "var(--color-modal)"
       },
 
     },

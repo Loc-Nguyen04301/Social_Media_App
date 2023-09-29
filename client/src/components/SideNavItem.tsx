@@ -1,5 +1,4 @@
 import { Icon } from "react-feather";
-import "../styles/SideNavItem.scss";
 interface SideNavItemProps {
   icon?: Icon;
   profileImage?: string;

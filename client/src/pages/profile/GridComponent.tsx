@@ -1,6 +1,5 @@
 import { useState } from "react";
 import profileImage from "../../assets/images/profile.jpg";
-import "../../styles/GridComponent.scss";
 import { Heart, MessageCircle, MoreHorizontal } from "react-feather";
 
 const listPost = [

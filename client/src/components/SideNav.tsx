@@ -12,8 +12,9 @@ import {
 } from "react-feather";
 import { AuthContext } from "../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
-import ListSeeMore from "./ListSeeMore";
 import LogoComponent from "./LogoComponent";
+import useBoundStore from "../store";
+import AccountTransferModal from "./modal/AccountTransferModal";
 
 export enum TABS {
   HOME = "HOME",
@@ -28,14 +29,14 @@ export enum TABS {
 const SideNav = () => {
   const { user } = React.useContext(AuthContext);
   const [currentTab, setCurrentTab] = useState<TABS>(TABS.HOME);
-  const [listSeeMore, setListSeeMore] = useState<boolean>(false);
+  const setListSeeMore = useBoundStore((state) => state.setListSeeMore);
   const location = useLocation();
 
   return (
     <div className="fixed z-10 flex h-full w-[250px] flex-col justify-between border-r-[1px] border-r-color-border bg-white px-3 pb-5 pt-2 max-lg:w-[72px]">
-      <div>
+      <div className="sideNav-list">
         <LogoComponent />
-        <div className="">
+        <div className="w-full">
           <SideNavItem
             icon={HomeIcon}
             title="Trang chủ"
@@ -94,9 +95,9 @@ const SideNav = () => {
       <SideNavItem
         icon={AlignJustify}
         title="Xem thêm"
-        setListSeeMore={() => setListSeeMore(!listSeeMore)}
+        setListSeeMore={() => setListSeeMore()}
       />
-      {listSeeMore && <ListSeeMore />}
+      <AccountTransferModal />
     </div>
   );
 };

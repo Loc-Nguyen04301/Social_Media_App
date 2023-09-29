@@ -25,7 +25,7 @@ const ListSeeMore = () => {
   };
 
   return (
-    <div className="fixed bottom-[70px] left-3 min-w-[268px] rounded-[16px] bg-white p-2 shadow-2xl">
+    <div className="fixed bottom-[70px] left-3 z-[10000] min-w-[268px] rounded-[16px] bg-white p-2 shadow-2xl">
       <SideNavItem title="Cài đặt" icon={SettingIcon} />
       <SideNavItem title="Hoạt động của bạn" icon={TimerIcon} />
       <SideNavItem title="Đã lưu" icon={Bookmark} />

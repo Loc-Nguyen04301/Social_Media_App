@@ -1,10 +1,10 @@
+@import "./styles/GridComponent.scss";
+@import "./styles/loading.scss";
+@import "./styles/SideNavItem.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./styles/_GridComponent.scss";
-@import "./styles/_loading.scss";
-@import "./styles/_SideNavItem.scss";
 
 @layer base {
   :root {

@@ -12,6 +12,7 @@ import { ERROR, LOADING, REFRESH_TOKEN } from "./reducers/type";
 import { getAPI } from "./utils/FetchData";
 import { AlertContext } from "./contexts/AlertContext";
 import { publicRoutes } from "./routes";
+import Loading from "./components/alert/Loading";
 
 const Login = lazy(() => import("./pages/login/index"));
 const Register = lazy(() => import("./pages/register/index"));
@@ -47,7 +48,7 @@ function App() {
   return (
     <Router>
       <Alert />
-      <Suspense fallback={<div>Loading...</div>} />
+      <Suspense fallback={<Loading></Loading>} />
       <Routes>
         {publicRoutes.map((route) => {
           const Layout = route.layout;

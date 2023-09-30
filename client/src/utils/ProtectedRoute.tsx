@@ -1,19 +1,19 @@
 import React, { ReactNode } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { user, access_token } = React.useContext(AuthContext);
-  const location = useLocation();
+  const logged = localStorage.getItem("logged");
 
-  if (Object.keys(user).length === 0 && !access_token) {
-    return <Navigate to={"/"} state={{ from: location }} replace />;
+  // If don't authenticate, retrun Login Page
+  if (logged !== "true") {
+    return <Navigate to={"/"} replace={true} />;
   }
-  console.log(!access_token);
+
   return children;
 };
 

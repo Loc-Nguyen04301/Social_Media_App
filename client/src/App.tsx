@@ -1,10 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  RouteProps,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./pages/notFound";
 import Alert from "./components/alert/Alert";
 import { AuthContext } from "./contexts/AuthContext";
@@ -13,6 +8,7 @@ import { getAPI } from "./utils/FetchData";
 import { AlertContext } from "./contexts/AlertContext";
 import { publicRoutes } from "./routes";
 import Loading from "./components/alert/Loading";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 const Login = lazy(() => import("./pages/login/index"));
 const Register = lazy(() => import("./pages/register/index"));
@@ -58,9 +54,11 @@ function App() {
               path={route.path}
               key={route.path}
               element={
-                <Layout>
-                  <View />
-                </Layout>
+                <ProtectedRoute>
+                  <Layout>
+                    <View />
+                  </Layout>
+                </ProtectedRoute>
               }
             />
           );

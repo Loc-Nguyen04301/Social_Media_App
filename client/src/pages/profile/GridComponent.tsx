@@ -16,23 +16,23 @@ interface Post {
 
 const GridComponent = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [chosenPost, setChosenPost] = useState<Post>({});
-
-  const showModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const [chosenPost, setChosenPost] = useState<Post>();
 
   const handleClickChosenPost = (post: Post) => {
     setChosenPost(post);
   };
 
   const handleClickCard = (post: Post) => {
-    showModal();
+    setIsModalOpen(true);
     handleClickChosenPost(post);
   };
 
-  const handleCancel = () => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
   return (
@@ -40,7 +40,7 @@ const GridComponent = () => {
       <div className="grid grid-cols-3 gap-1">
         {listPost.map((post) => (
           <div
-            className="card"
+            className="card cursor-pointer"
             onClick={() => handleClickCard(post)}
             key={post.id}
           >
@@ -61,10 +61,14 @@ const GridComponent = () => {
         ))}
       </div>
       <div
-        className={`${
-          isModalOpen ? "" : "hidden"
-        } fixed left-0 top-0 z-50 h-screen min-w-full bg-color-modal px-60 py-14`}
+        className={`${isModalOpen ? "overlay !fixed" : "hidden"} px-60 py-14`}
       >
+        <button
+          className="absolute right-5 top-3 z-50 font-semibold text-white"
+          onClick={handleCloseModal}
+        >
+          X
+        </button>
         <div className="flex">
           <div className="w-1/2">
             <img src={profileImage} />

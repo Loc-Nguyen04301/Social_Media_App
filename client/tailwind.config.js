@@ -7,6 +7,7 @@ export default {
     extend: {
       colors: {
         "blue-text": 'var(--blue-text)',
+        "color-hover-blue-text": 'var(--color-hover-blue-text)',
         "main-color-text": "var(--main-color-text)",
         "sub-color-text": "var(--sub-color-text)",
         "color-border": "var(--color-border)",

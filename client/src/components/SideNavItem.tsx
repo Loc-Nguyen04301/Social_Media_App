@@ -4,6 +4,7 @@ interface SideNavItemProps {
   profileImage?: string;
   title?: string;
   className?: string;
+  shrink?: boolean;
   setCurrentTab?: () => void;
   setListSeeMore?: () => void;
   handleLogOut?: () => void;
@@ -17,6 +18,7 @@ const SideNavItem = ({
   setCurrentTab,
   setListSeeMore,
   handleLogOut,
+  shrink,
 }: SideNavItemProps) => {
   return (
     <div
@@ -43,7 +45,13 @@ const SideNavItem = ({
             ></img>
           </div>
         )}
-        <div className="ml-4 text-base max-lg:hidden">{title}</div>
+        <div
+          className={`${
+            shrink === true ? "hidden" : ""
+          } ml-4 text-base max-lg:hidden`}
+        >
+          {title}
+        </div>
       </div>
     </div>
   );

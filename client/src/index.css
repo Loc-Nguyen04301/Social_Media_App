@@ -9,6 +9,7 @@
 @layer base {
   :root {
     --blue-text: #0095f6;
+    --color-hover-blue-text: #00376b;
     --main-color-text: #000000;
     --sub-color-text: #737373;
     --color-border: #dbdbdb;
@@ -24,4 +25,8 @@ html {
 .image-icon-sidenav {
   width: 24px;
   max-width: none !important;
+}
+
+*:focus {
+  outline: none;
 }

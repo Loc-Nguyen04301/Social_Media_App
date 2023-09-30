@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SideNav from "../../components/SideNav";
 import useBoundStore from "../../store";
 import ListSeeMore from "../../components/ListSeeMore";
+import SearchBox from "../../components/SearchBox";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
